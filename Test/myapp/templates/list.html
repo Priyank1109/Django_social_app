@@ -1,12 +1,12 @@
 <!-- user_list.html -->
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
     <title>User List</title>
-    <!-- Include Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-L5WR52LlC1VW6PRxRJHLsEDlzqfE2cG9fH64cFfLez9ZlN1u2kDcp1eODL/f5GCr3svLm4FZcXAdw5a3B9ImJw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
-        /* Custom styles for this template */
         .table-container {
             max-width: 800px;
             margin: 0 auto;
@@ -17,6 +17,11 @@
 <body>
     <div class="container table-container">
         <h2 class="mt-4 mb-4">User List</h2>
+        <div class="mb-3">
+            <a href="{% url 'register' %}" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Add User
+            </a>
+        </div>
         <table class="table table-bordered table-striped">
             <thead class="thead-dark">
                 <tr>
@@ -26,18 +31,17 @@
                     <th scope="col">Profile Image</th>
                     <th scope="col">Registration Date</th>
                     <th scope="col">Action</th>
-
                 </tr>
             </thead>
             <tbody>
                 {% for user in users %}
                 <tr>
-                    <td class="editable" data-field="UserName" data-id="{{ user.id }}">{{ user.UserName }}</td>
-                    <td class="editable" data-field="official_email" data-id="{{ user.id }}">{{ user.official_email }}</td>
+                    <td class="editable" data-field="UserName" data-id="{{ user.id }}">{{ user.username }}</td>
+                    <td class="editable" data-field="official_email" data-id="{{ user.id }}">{{ user.email }}</td>
                     <td class="editable" data-field="primary_contact_number" data-id="{{ user.id }}">{{ user.primary_contact_number }}</td>
                     <td class="editable" data-field="profile_image" data-id="{{ user.id }}">
                         {% if user.profile_image %}
-                        <img src="{{ user.profile_image }}" class="img-thumbnail" style="max-width: 100px;">
+                        <img src="{{ user.profile_image.url}}" class="img-thumbnail" style="max-width: 100px;">
                         {% else %}
                         No image
                         {% endif %}
@@ -45,7 +49,7 @@
                     <td>{{ user.created_at|date:'d-m-Y' }}</td>
                     <td>
                         <button class="btn btn-sm btn-warning edit-btn" data-id="{{ user.id }}">
-                            <i class="fas fa-edit"></i>
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
                         </button>
                         <button class="btn btn-sm btn-success save-btn d-none" data-id="{{ user.id }}">
                             <i class="fas fa-save"></i>
@@ -67,6 +71,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script>
 $(document).ready(function() {
     $('.edit-btn').click(function() {

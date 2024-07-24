@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Posts</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #fafafa;
+            padding-top: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+        }
+        .post-card {
+            margin-bottom: 20px;
+            background-color: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .post-card img {
+            width: 100%;
+            max-height: 600px;
+            object-fit: cover;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+        .post-card .card-body {
+            padding: 15px;
+        }
+        .post-card .card-footer {
+            background-color: #fff;
+            border-top: 1px solid #e0e0e0;
+            padding: 10px 15px;
+        }
+        .post-card .caption {
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        .post-card .view-post {
+            color: #3897f0;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .post-card .view-post:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="mb-3">
+            
+            <a href="{% url 'post_create' %}" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Add Post
+            </a>
+            <a href="{% url 'logout' %}" class="btn btn-primary">
+                <i class="fas fa-plus"></i> logout
+            </a>
+        </div>
+        {% for post in posts %}
+        <div class="card post-card">
+            <img class="card-img-top" src="{{ post.image.url }}" alt="{{ post.caption }}">
+            <div class="card-body">
+                <p class="card-text caption">{{request.user.username}}: {{ post.caption }}</p>
+            </div>
+            <div class="card-footer">
+                <a href="{% url 'post_detail' pk=post.pk %}" class="view-post">View post</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

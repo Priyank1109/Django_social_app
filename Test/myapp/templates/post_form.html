@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Post</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #fafafa;
+        }
+        .container {
+            max-width: 600px;
+            margin-top: 50px;
+        }
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        .card-header {
+            background-color: #fff;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .card-header img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .card-header .username {
+            font-weight: 600;
+        }
+        .card-body {
+            padding: 0;
+        }
+        .form-group {
+            margin: 20px;
+        }
+        .form-group textarea {
+            width: 100%;
+            border: none;
+            resize: none;
+            font-size: 16px;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #f0f0f0;
+        }
+        .btn-primary {
+            background-color: #3897f0;
+            border: none;
+            width: 100%;
+            border-radius: 5px;
+            padding: 10px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        .btn-primary:hover {
+            background-color: #2772b5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-header d-flex align-items-center">
+                <img src="https://via.placeholder.com/40" alt="User Avatar">
+                <span class="username">Username</span>
+            </div>
+            <div class="card-body">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="file" class="form-control-file" name="image" accept="image/*" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" name="caption" placeholder="Write a caption..." rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Share Post</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
